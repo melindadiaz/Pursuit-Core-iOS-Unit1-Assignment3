@@ -31,11 +31,19 @@ func secretGame() {
     let operators = Int.random(in: 0..<4)
     let number1 = Int.random(in: 0..<10)
     let number2 = Int.random(in: 0..<10)
+    let sum = number1 + number2
+    let subtraction = number1 - number2
+    let multiply = number1 * number2
+    let divide = number1 / number2
     switch operators {
-    case 0: number1 + number2
-    case 1: number1 - number2
-    case 2: number1 * number2
-    case 3: number1 / number2
+    case 0: sum
+        print(0)
+    case 1: subtraction
+        print(1)
+    case 2: multiply
+        print(2)
+    case 3: divide
+        print(3)
     default:
         print("Cannot compute try again"); secretGame()
     }
@@ -46,23 +54,13 @@ func basicCalc() {
     let userInput:String = readLine() ?? ""
     
     let stringToArray = userInput.components(separatedBy: " ")
-    guard stringToArray.count == 3 && operations.contains(stringToArray[1]) else { if stringToArray.contains("?") { return secretGame()
+    guard stringToArray.count == 3 && operations.contains(stringToArray[1]), let indexZero = Double(stringToArray[0]), let indexTwo = Double(stringToArray[2]) else { if stringToArray.contains("?") { return secretGame()
     }   else {
         print("Unable to compute. Try again")
         return basicCalc()
         }
     }
-    guard let indexZero = Double(stringToArray[0]) else {
-        print("Ask a valid question")
-        return basicCalc()
-    }
-    guard let indexTwo = Double(stringToArray[2]) else {
-        print("Ask a valid question")
-        return basicCalc()
-    }
-    
     let closureOperation = mathStuffFactory(opString: stringToArray[1])
-
     let result = closureOperation(indexZero,indexTwo)
     
     print("result of operation is \(result)")
